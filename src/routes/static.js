@@ -10,4 +10,5 @@ router.get("/marco", (req, res, next) => {
   res.send("polo");
 });
 
+//add /marco to localhost:3000; localhost:3000/marco ===> polo
 module.exports = router;
