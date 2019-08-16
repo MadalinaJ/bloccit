@@ -22,5 +22,8 @@
     "pg-hstore": "^2.3.3",
     "request": "^2.88.0",
     "sequelize": "^5.15.0"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }
