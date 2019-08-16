@@ -17,14 +17,12 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jasmine": "^3.4.0",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "request": "^2.88.0",
     "sequelize": "^5.15.0",
     "sequelize-cli": "^5.5.0"
-  },
-  "devDependencies": {
-    "faker": "^4.1.0"
   }
 }
