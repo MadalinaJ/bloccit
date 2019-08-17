@@ -1,3 +1,9 @@
 body {
     padding-top: 54px;
   }
+h1{
+  padding-top: 54px;
+}
+  .list-group {
+    padding-top: 30px;
+  }
