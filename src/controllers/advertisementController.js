@@ -63,7 +63,7 @@ module.exports = {
     update(req, res, next){
 
             //#1
-            advertisementQueries.updateTopic(req.params.id, req.body, (err, advertisement) => {
+            advertisementQueries.updateAdvertisement(req.params.id, req.body, (err, advertisement) => {
             
             //#2
                 if(err || advertisement == null){
