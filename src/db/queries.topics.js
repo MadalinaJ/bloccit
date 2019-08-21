@@ -27,8 +27,7 @@ module.exports = {
             {
               model: Flair,
             as: "flairs"
-            }
-            
+            }    
           ]
           })
     .then((topic) => {
