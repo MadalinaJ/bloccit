@@ -100,7 +100,7 @@ describe("routes : posts", () => {
 
   describe("GET /topics/:topicId/posts/:id", () => {
     it("should render a view with the selected post", (done) => {
-      request.get(`${base}/${this.topic.id}/posts/${this.post.id}`, (err, res, body) => {
+      request.get(`${base} ${this.topic.id}/posts/${this.post.id}`, (err, res, body) => {
         expect(err).toBeNull();
         expect(body).toContain("Snowball Fighting");
         done();
@@ -315,19 +315,6 @@ describe("routes : posts", () => {
 
   });
 });
-  // describe("POST /topics/:topicId/posts/:id/update", () => {
-  //   it("should return a status code 302", (done) => {
-  //     request.post({
-  //       url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
-  //       form: {
-  //         title: "Snowman Building Competition",
-  //         body: "I love watching them melt slowly."
-  //       }
-  //     }, (err, res, body) => {
-  //       expect(res.statusCode).toBe(302);
-  //       done();
-  //     });
-  //   });
-  // });
+  
   }); //End Context of Member User
 

@@ -3,6 +3,21 @@ const Authorizer = require("../policies/post");
 
 
 module.exports = {
+
+  // new(req, res, next) {
+  //   console.log("new post"); // this tells us whether the function is being called at all
+  //   const authorized = new Authorizer(req.user).new();
+  //   if (authorized) {
+  //     console.log("user is authorized to create new post");
+  //     res.render("posts/new", {
+  //       topicId: req.params.topicId
+  //     });
+  //   } else {
+  //     console.log("user is not authorized to create new post, redirecting to topic");
+  //     req.flash("notice", "You are not authorized to do that.");
+  //     res.redirect(`/topics/${req.params.topicId}`);
+  //   }
+  // },
   new(req, res, next) {
     const authorized = new Authorizer(req.user).new();
     if (authorized) {
