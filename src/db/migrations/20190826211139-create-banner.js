@@ -29,7 +29,7 @@ module.exports = {
           model: "Topics",
           key: "id",
           as: "topicsId",
-        }
+        },
       }
     });
   },
