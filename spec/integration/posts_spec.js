@@ -8,6 +8,28 @@ const Post = require("../../src/db/models").Post;
 const User = require("../../src/db/models").User;
 
 
+function authorizeUser(role, done) {
+  User.create({
+      email: "#{role}@example.com",
+      password: "123456",
+      role: role
+    })
+    .then((user) => {
+      request.get({
+          url: "http://localhost:3000/auth/fake",
+          form: {
+            role: user.role,
+            userId: user.id,
+            email: user.email
+          }
+        },
+        (err, res, body) => {
+          done();
+        }
+      );
+    });
+}
+
 describe("routes : posts", () => {
 
   beforeEach((done) => {
