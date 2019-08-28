@@ -5,6 +5,7 @@ const base = "http://localhost:3000/topics/";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const User = require("../../src/db/models").User;
+
 function authorizeUser(role, done) {
   User.create({
     email: "#{role}@example.com",
@@ -26,6 +27,7 @@ function authorizeUser(role, done) {
     );
   });
 }
+
 describe("routes : topics", () => {
   beforeEach(done => {
     this.topic;
@@ -34,7 +36,7 @@ describe("routes : topics", () => {
     }).then(response => {
       Topic.create({
           title: "JS Frameworks",
-          description: "There are a lot of them"
+          description: "There is a lot of them"
         })
         .then(topic => {
           this.topic = topic;
@@ -48,26 +50,9 @@ describe("routes : topics", () => {
   });
 
   describe("admin user performing CRUD actions for Topic", () => {
+
     beforeEach((done) => {
-      User.create({
-          email: "admin@example.com",
-          password: "123456",
-          role: "admin"
-        })
-        .then((user) => {
-          request.get({
-              url: "http://localhost:3000/auth/fake",
-              form: {
-                role: user.role,
-                userId: user.id,
-                email: user.email
-              }
-            },
-            (err, res, body) => {
-              done();
-            }
-          );
-        });
+      authorizeUser("admin", done);
     });
 
     describe("GET /topics", () => {
@@ -99,8 +84,8 @@ describe("routes : topics", () => {
         const options = {
           url: `${base}create`,
           form: {
-            title: "blink-182 songs",
-            description: "What's your favorite blink-182 song?"
+            title: "Test Topic Title",
+            description: "Test topic description."
           }
         };
         request.post(options,
@@ -108,12 +93,12 @@ describe("routes : topics", () => {
 
             Topic.findOne({
                 where: {
-                  title: "blink-182 songs"
+                  title: "Test Topic Title"
                 }
               })
               .then((topic) => {
-                expect(topic.title).toBe("blink-182 songs");
-                expect(topic.description).toBe("What's your favorite blink-182 song?");
+                expect(topic.title).toBe("Test Topic Title");
+                expect(topic.description).toBe("Test topic description.");
                 done();
               })
               .catch((err) => {
@@ -208,8 +193,8 @@ describe("routes : topics", () => {
         const options = {
           url: `${base}${this.topic.id}/update`,
           form: {
-            title: "JS Frameworks",
-            description: "There are a lot of them."
+            title: "Updated Title",
+            description: "Updated description."
           }
         };
 
@@ -224,7 +209,7 @@ describe("routes : topics", () => {
                 }
               })
               .then((topic) => {
-                expect(topic.title).toBe("JS Frameworks");
+                expect(topic.title).toBe("Updated Title");
                 done();
               });
           });
@@ -238,16 +223,7 @@ describe("routes : topics", () => {
   // context of member user
   describe("member user performing CRUD actions for Topic", () => {
     beforeEach((done) => {
-      request.get({
-          url: "http://localhost:3000/auth/fake",
-          form: {
-            role: "member"
-          }
-        },
-        (err, res, body) => {
-          done();
-        }
-      );
+      authorizeUser("member", done);
     });
 
     describe("GET /topics", () => {
@@ -277,8 +253,8 @@ describe("routes : topics", () => {
       const options = {
         url: `${base}create`,
         form: {
-          title: "blink-182 songs",
-          description: "What's your favorite blink-182 song?"
+          title: "Test Topic Title",
+          description: "Test topic description."
         }
       };
 
@@ -287,7 +263,7 @@ describe("routes : topics", () => {
           (err, res, body) => {
             Topic.findOne({
                 where: {
-                  title: "blink-182 songs"
+                  title: "Test Topic Title"
                 }
               })
               .then((topic) => {
@@ -357,8 +333,8 @@ describe("routes : topics", () => {
         const options = {
           url: `${base}${this.topic.id}/update`,
           form: {
-            title: "JS Frameworks",
-            description: "There are a lot of them"
+            title: "Updated Title",
+            description: "Updated description."
           }
         }
 
