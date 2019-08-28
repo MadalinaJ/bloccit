@@ -15,9 +15,11 @@ describe("routes : votes", () => {
     this.topic;
     this.post;
     this.vote;
+
     sequelize.sync({
       force: true
     }).then((res) => {
+
       User.create({
           email: "starman@tesla.com",
           password: "Trekkie4lyfe"
@@ -82,7 +84,7 @@ describe("routes : votes", () => {
                 }
               })
               .then((vote) => {
-                expect(vote).toBeNull();
+                expect(vote).not.toBeNull();
                 done();
               })
               .catch((err) => {

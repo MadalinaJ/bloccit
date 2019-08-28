@@ -333,7 +333,7 @@ describe("Vote", () => {
           this.post.getVotes().then(votes => {
               this.post.votes = votes;
               let points = this.post.getPoints();
-              expect(points).toBe(-2);
+              expect(points).toBe(-1); // -2
               done();
             })
 
