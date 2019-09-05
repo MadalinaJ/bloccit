@@ -168,7 +168,7 @@ describe("signed in user favoriting a post", () => {
             (err, res, body) => {
               this.post.getFavorites()
               .then((favorites) => {
-                expect(favorites.length).toBe(favCountBeforeDelete - 0); // -1
+                expect(favorites.length).toBe(favCountBeforeDelete - 1); // -1
                 done();
               });
             }
